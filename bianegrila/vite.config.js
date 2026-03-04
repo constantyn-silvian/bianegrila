@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   base: '/bianegrila/',
   build: {
-    outDir: 'docs',
+    outDir: '../docs',
   },
   plugins: [react(), tailwindcss()],
 })
