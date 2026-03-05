@@ -1,6 +1,6 @@
 export default function Picture({ src, alt }) {
   return (
-      <div className="min-w-80 w-40/100 max-w-full h-full rounded-lg overflow-hidden shadow-lg">
+      <div className="min-w-80 w-40/100 max-w-full h-full max-h-full rounded-lg overflow-hidden shadow-lg">
       <img
         src={src}
         alt={alt}
