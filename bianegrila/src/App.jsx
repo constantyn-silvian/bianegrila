@@ -9,7 +9,9 @@ function App() {
   const [scrollX, setScrollX] = useState(0);
   const [pictures, setPictures] = useState([]);
   const [touchStartX, setTouchStartX] = useState(0);
+  const [started, setStarted] = useState(false);
   const containerRef = useRef(null);
+  const audioRef = useRef(null);
 
   const handleScroll = () => {
     if (containerRef.current) {
@@ -35,6 +37,15 @@ function App() {
     }
   }
   useEffect(() => {
+    const playAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.play();
+        window.removeEventListener('click', playAudio);
+        console.log('Audio started playing');
+      }
+    };
+    window.addEventListener('click', playAudio);
+
     const picturesNames = []
     for (let i = 1; i <= 20; i++) {
       picturesNames.push(`poza${i}.jpeg`)
@@ -45,6 +56,7 @@ function App() {
       alt: name,
     }))]
     setPictures(pics);
+
   }, [])
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,27 +78,40 @@ function App() {
       <div className="h-[95%] w-[95%] relative flex flex-col items-center justify-evenly gap-6 
                 bg-linear-to-br from-pink-400 via-rose-400 to-fuchsia-500 
                 text-white rounded-lg shadow-2xl p-0 border-3 border-white/30 ">
-        {/* confetti  */}
-        {/* <h1 className={`absolute top-${3} left-4`} style={{
-          fontSize: 'clamp(2rem, 8vw, 6rem)',
-        }}>🎉</h1>
-        <h1 className='absolute top-4 right-4 transform scale-x-[-1]' style={{
-          fontSize: 'clamp(2rem, 8vw, 6rem)',
-          top: 10,
-        }}>🎉</h1> */}
-        <div className="w-full h-1/4 flex flex-col items-center justify-center  ">
+        {/* Audio element for background music */}
+        <audio className='hidden' loop ref={audioRef}>
+          <source src="melodie.mp3#t=16" type="audio/mpeg" />
+        </audio>
+
+        {/* initial cover */}
+        {!started && (
+          <div onClick={()=>{setStarted(true)}} className="absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-lg rounded-lg flex items-center justify-center z-10 cursor-pointer">
+            <h1 style={{
+              fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+            }} className="font-bold italic text-center text-white/90 drop-shadow-lg tracking-wide">
+              Click anywhere! 🎉
+            </h1>
+          </div>
+        )}
+        {/* header and description */}
+        <div className="w-full flex flex-col items-center justify-center gap-2">
           <h1
             className="font-extrabold text-center drop-shadow-lg tracking-wide italic"
             style={{
-              fontSize: 'clamp(2rem, 6vw, 4rem)',
+              fontSize: 'clamp(2.3rem, 6vw, 4rem)',
             }}
           >
             🎀 La Mulți Ani  🎀
           </h1>
           <h2 className="font-bold italic text-xl" style={{
-            fontSize: 'clamp(1.5rem, 5vw, 3rem)',
+            fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           }}>🎉BIAAA<span className='inline-block transform scale-x-[-1]'>🎉</span></h2>
+          <p className="text-center italic text-lg" style={{
+            fontSize: 'clamp(1rem, 3vw, 1.5rem)',
+          }}>Sper să ai o zi la fel de minunată ca tine! 🥳</p>
         </div>
+
+          {/* photos container */}
         <div ref={containerRef} className="w-11/12 md:w-3/4 h-2/3 
                   bg-white/20 backdrop-blur-lg 
                   rounded-3xl shadow-2xl 
@@ -102,7 +127,9 @@ function App() {
             scrollTo(scrollX + e.deltaY / (3 / 2)); // vertical wheel → scroll orizontal
           }}>
           <div className="flex items-center justify-start gap-4 h-full bg-black/90 rounded-3xl p-4">
-            {pictures.map((picture, index) => (Picture(picture, index)))}
+            {pictures.map((picture, index) => (
+              <Picture key={index} src={picture.src} alt={picture.alt} />
+            ))}
           </div>
         </div>
       </div>
