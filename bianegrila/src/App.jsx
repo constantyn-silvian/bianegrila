@@ -101,14 +101,14 @@ function App() {
               fontSize: 'clamp(2.3rem, 6vw, 4rem)',
             }}
           >
-            🎀 La Mulți Ani  🎀
+            🎀 La Mulți Anii  🎀
           </h1>
           <h2 className="font-bold italic text-xl" style={{
             fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           }}>🎉BIAAA<span className='inline-block transform scale-x-[-1]'>🎉</span></h2>
           <p className="text-center italic text-lg" style={{
             fontSize: 'clamp(1rem, 3vw, 1.5rem)',
-          }}>Sper să ai o zi la fel de minunată ca tine! 🥳</p>
+          }}>Să fie anul ăsta plin de numai băieți.🥳</p>
         </div>
 
           {/* photos container */}
@@ -116,7 +116,7 @@ function App() {
                   bg-white/20 backdrop-blur-lg 
                   rounded-3xl shadow-2xl 
                   border border-white/30 
-                  flex items-center justify-left gap-4 scroll-behavior-smooth 
+                  flex items-center justify-left scroll-behavior-smooth 
                   text-2xl font-semibold text-center p-6 overflow-hidden overflow-y-hidden
                   bg"
           onTouchStart={handleTouchStart}
