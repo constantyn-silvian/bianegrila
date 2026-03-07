@@ -10,6 +10,7 @@ function App() {
   const [pictures, setPictures] = useState([]);
   const [touchStartX, setTouchStartX] = useState(0);
   const [started, setStarted] = useState(false);
+  const [random, setRandom] = useState(0);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -46,6 +47,16 @@ function App() {
     };
     window.addEventListener('click', playAudio);
 
+    if(Math.random() * 100 <= 5)
+    {
+      setRandom(1);
+      audioRef.current.src = `melodie1.mp3`;
+    }
+    else{
+      setRandom(0);
+      audioRef.current.src = `melodie0.mp3#t=16`;
+    }
+    
     const picturesNames = []
     for (let i = 1; i <= 20; i++) {
       picturesNames.push(`poza${i}.jpeg`)
@@ -80,7 +91,7 @@ function App() {
                 text-white rounded-lg shadow-2xl p-0 border-3 border-white/30 ">
         {/* Audio element for background music */}
         <audio className='hidden' loop ref={audioRef}>
-          <source src="melodie.mp3#t=16" type="audio/mpeg" />
+          <source src={`melodie${random}.mp3#t=16`} type="audio/mpeg" />
         </audio>
 
         {/* initial cover */}
@@ -88,7 +99,7 @@ function App() {
           <div onClick={()=>{setStarted(true)}} className="absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-lg rounded-lg flex items-center justify-center z-10 cursor-pointer">
             <h1 style={{
               fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-            }} className="font-bold italic text-center text-white/90 drop-shadow-lg tracking-wide">
+            }} className="font-bold italic text-center text-white/90 transition-all duration-1s hover:scale-110 drop-shadow-lg tracking-wide">
               Click anywhere! 🎉
             </h1>
           </div>
@@ -108,7 +119,7 @@ function App() {
           }}>🎉BIAAA<span className='inline-block transform scale-x-[-1]'>🎉</span></h2>
           <p className="text-center italic text-lg" style={{
             fontSize: 'clamp(1rem, 3vw, 1.5rem)',
-          }}>Să fie anul ăsta plin de numai băieți.🥳</p>
+          }}>Să fie anul ăsta plin numai de băieți.🥳</p>
         </div>
 
           {/* photos container */}
