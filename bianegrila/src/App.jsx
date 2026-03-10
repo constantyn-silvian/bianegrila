@@ -47,19 +47,18 @@ function App() {
     };
     window.addEventListener('click', playAudio);
 
-    if(Math.random() * 100 <= 5)
-    {
+    if (Math.random() * 100 <= 5) {
       setRandom(1);
       audioRef.current.src = `melodie1.mp3`;
     }
-    else{
+    else {
       setRandom(0);
       audioRef.current.src = `melodie0.mp3#t=16`;
     }
-    
+
     const picturesNames = []
     for (let i = 1; i <= 49; i++) {
-      if(i == 18)continue;
+      if (i == 18) continue;
       picturesNames.push(`poza${i}.jpeg`)
     }
 
@@ -97,7 +96,7 @@ function App() {
 
         {/* initial cover */}
         {!started && (
-          <div onClick={()=>{setStarted(true)}} className="absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-lg rounded-lg flex items-center justify-center z-10 cursor-pointer">
+          <div onClick={() => { setStarted(true) }} className="absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-lg rounded-lg flex items-center justify-center z-10 cursor-pointer">
             <h1 style={{
               fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
             }} className="font-bold italic text-center text-white/90 transition-all duration-1s hover:scale-110 drop-shadow-lg tracking-wide">
@@ -113,17 +112,21 @@ function App() {
               fontSize: 'clamp(2.3rem, 6vw, 4rem)',
             }}
           >
-            🎀 La Mulți Anii  🎀
+            🎀 La Mulți Anii🎀
           </h1>
           <h2 className="font-bold italic text-xl" style={{
             fontSize: 'clamp(1.8rem, 5vw, 3rem)',
-          }}>🎉BIAAA<span className='inline-block transform scale-x-[-1]'>🎉</span></h2>
+          }}>🎉BIAAA •
+            <span className='inline-block transition-all duration-300 transform hover:scale-110 hover:text-purple-700 hover:drop-shadow-[0_0_15px_rgba(255,105,180,0.8)] cursor-default'>
+              18
+            </span>
+            <span className='inline-block transform scale-x-[-1]'>🎉</span></h2>
           <p className="text-center italic text-lg" style={{
             fontSize: 'clamp(1rem, 3vw, 1.5rem)',
           }}>Să fie anul ăsta plin numai de băieți.🥳</p>
         </div>
 
-          {/* photos container */}
+        {/* photos container */}
         <div ref={containerRef} className="w-11/12 md:w-3/4 h-2/3 
                   bg-white/20 backdrop-blur-lg 
                   rounded-3xl shadow-2xl 
