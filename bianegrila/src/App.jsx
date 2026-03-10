@@ -58,7 +58,8 @@ function App() {
     }
     
     const picturesNames = []
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 49; i++) {
+      if(i == 18)continue;
       picturesNames.push(`poza${i}.jpeg`)
     }
 
